@@ -54,6 +54,18 @@ public:
             cout << root->val << " ";
         }
     }
+    
+    int count(Node *root) {
+        int x, y;
+        
+        if (root != nullptr) {
+            x = count(root->left);
+            y = count(root->right);
+            
+            return x + y + 1;
+        }
+        return 0;
+    }
 };
 
 int main()
@@ -74,6 +86,9 @@ int main()
     cout << endl;
     cout << "Post Order Traveral: " << endl;
     root->Postorder(root);
+    cout << endl;
+    cout << "Number of nodes is: " << endl;
+    cout << root->count(root);
     cout << endl;
     
     return 0;
