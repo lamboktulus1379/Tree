@@ -30,12 +30,11 @@ public:
     void Preorder(Node *root)
     {
         
-        if (root == nullptr) {
-            return;
+        if (root != nullptr) {
+            cout << root->val << " ";
+            Preorder(root->left);
+            Preorder(root->right);
         }
-        cout << root->val << " ";
-        Preorder(root->left);
-        Preorder(root->right);
     }
     
     void Inorder(Node *root)
