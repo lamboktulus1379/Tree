@@ -66,6 +66,22 @@ public:
         }
         return 0;
     }
+    
+    int height(Node *root) {
+        int x, y;
+        
+        if (root != nullptr) {
+            x = height(root->left);
+            y = height(root->right);
+            
+            if (x > y) {
+                return x + 1;
+            } else {
+                return y + 1;
+            }
+        }
+        return 0;
+    }
 };
 
 int main()
@@ -89,6 +105,9 @@ int main()
     cout << endl;
     cout << "Number of nodes is: " << endl;
     cout << root->count(root);
+    cout << endl;
+    cout << "Height of tree is: " << endl;
+    cout << root->height(root);
     cout << endl;
     
     return 0;
