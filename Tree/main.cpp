@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -82,6 +83,46 @@ public:
         }
         return 0;
     }
+    
+    void rightView(Node *root) {
+        queue<Node*> q;
+        q.push(root);
+        while (q.size() > 0) {
+            int len = q.size();
+            int count = 0;
+            Node *current;
+            while (count < len) {
+                current = q.front();
+                q.pop();
+                
+                if (current->left != nullptr) {
+                    q.push(current->left);
+                }
+                if (current->right != nullptr) {
+                    q.push(current->right);
+                }
+                
+                count++;
+            }
+            cout << current->val << " ";
+        }
+    }
+    
+    void rightViewDFS(Node *root, int count, vector<int> &result) {
+        if (root == nullptr) {
+            return;
+        }
+        if (count >= result.size()) {
+            result.push_back(root->val);
+        }
+        
+        if (root->right != nullptr) {
+            rightViewDFS(root->right, count+1, result);
+        }
+        if (root->left != nullptr) {
+            rightViewDFS(root->left, count+1, result);
+        }
+    }
 };
 
 int main()
@@ -108,6 +149,17 @@ int main()
     cout << endl;
     cout << "Height of tree is: " << endl;
     cout << root->height(root);
+    cout << endl;
+    cout << "Right view: " << endl;
+    root->rightView(root);
+    
+    cout << endl;
+    vector<int> result;
+    cout << "Right view dfs: " << endl;
+    root->rightViewDFS(root, 0, result);
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i] << " ";
+    }
     cout << endl;
     
     return 0;
